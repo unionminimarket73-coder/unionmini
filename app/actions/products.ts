@@ -13,6 +13,8 @@ export interface Product {
   name_am?: string | null
   description?: string | null
   category?: string | null
+  /** Amharic category */
+  category_am?: string | null
   price: number
   cost?: number | null
   stock_qty: number
@@ -125,6 +127,7 @@ function mapProduct(row: any): Product {
     name_am: row.name_am ?? null,
     description: row.description,
     category: row.category,
+    category_am: row.category_am ?? null,
     price: Number(row.price) || 0,
     cost: row.cost != null ? Number(row.cost) : null,
     stock_qty: Number(row.stock_qty) || 0,
@@ -198,6 +201,7 @@ export async function createProduct(formData: FormData) {
   const nameAm = String(formData.get('name_am') || '').trim() || null
   const description = String(formData.get('description') || '').trim() || null
   const category = String(formData.get('category') || '').trim() || null
+  const categoryAm = String(formData.get('category_am') || '').trim() || null
   const barcode = String(formData.get('barcode') || '').trim() || null
   const unitRaw = String(formData.get('unit') || 'pcs').trim().toLowerCase()
   const allowedUnits = ['pcs', 'kg', 'cup', 'bottle', 'packages']
@@ -264,6 +268,9 @@ export async function createProduct(formData: FormData) {
   }
   if (nameAm) {
     basePayload.name_am = nameAm
+  }
+  if (categoryAm) {
+    basePayload.category_am = categoryAm
   }
   if (barcode) {
     basePayload.barcode = barcode
@@ -337,6 +344,7 @@ export async function updateProduct(formData: FormData) {
   const nameAm = String(formData.get('name_am') || '').trim() || null
   const description = String(formData.get('description') || '').trim() || null
   const category = String(formData.get('category') || '').trim() || null
+  const categoryAm = String(formData.get('category_am') || '').trim() || null
   const unitRaw = String(formData.get('unit') || 'pcs').trim().toLowerCase()
   const allowedUnits = ['pcs', 'kg', 'cup', 'bottle', 'packages']
   const unit = allowedUnits.includes(unitRaw) ? unitRaw : 'pcs'
@@ -366,6 +374,7 @@ export async function updateProduct(formData: FormData) {
     updated_at: new Date().toISOString(),
   }
   if (nameAm) updatePayload.name_am = nameAm
+  if (categoryAm) updatePayload.category_am = categoryAm
   updatePayload.unit = unit
 
   let { error } = await admin.from('products').update(updatePayload).eq('id', id)

@@ -43,10 +43,21 @@ export function EditProductForm({ product }: { product: Product }) {
           />
         </div>
         <div>
-          <label className="block text-sm text-slate-300 mb-1">Category</label>
+          <label className="block text-sm text-slate-300 mb-1">Category (English)</label>
           <input
             name="category"
             defaultValue={product.category || ''}
+            className="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white outline-none focus:ring-2 focus:ring-emerald-500"
+          />
+        </div>
+        <div>
+          <label className="block text-sm text-slate-300 mb-1">Category (Amharic)</label>
+          <input
+            name="category_am"
+            lang="am"
+            dir="auto"
+            defaultValue={product.category_am || ''}
+            placeholder="ምድብ በአማርኛ"
             className="w-full px-3 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-white outline-none focus:ring-2 focus:ring-emerald-500"
           />
         </div>

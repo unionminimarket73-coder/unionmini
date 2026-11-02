@@ -56,3 +56,4 @@ You can find it in Supabase Dashboard → Project Settings → API → `service_
 - Sales users log in with Staff ID (e.g. `EMP-1001`) which is converted to `emp-1001@unioninventory.local`
 - Make sure you create users with matching emails in Supabase Auth if you create them manually.
 "# union-inventory" 
+"# unionmini" 
